@@ -141,7 +141,7 @@ const properties = [
         squareFeet: 2000,
         petFriendly: false,
         description: "Cozy house near the dunes.",
-        propertyType: "House"
+        propertyType: "Town/Cluster"
     }
 ];
 
@@ -193,15 +193,34 @@ function findData(){
 
 //filter functionality
 
+// Get the select element
+const selectElement = document.getElementById("propertyType");
 
+// Attach the 'change' event listener to the select element
+selectElement.addEventListener('change', function() {
+    // Get the currently selected value
+    const selectedValue = selectElement.value;
+    //Display content
+    let Output = document.getElementById("container");
 
+    let displayOutput = "";
 
-//filer
-// price:
-// bedrooms:
-// bathrooms:
-// garages:
-// squareFeet:
-// petFriendly:
-// description:
-// propertyType:
+    // Loop through the properties array and log the names of matching properties
+    for(let i = 0; i < properties.length; i++) {
+        if(selectedValue === "All Types" || selectedValue === properties[i].propertyType) {
+            // console.log(properties[i].name);
+            displayOutput += `
+            <div class="card">
+            <p><strong>Location:</strong> ${properties[i].location}</p>
+            <p><strong>Description:</strong> ${properties[i].name}</p>
+            <p><strong>Property Type:</strong> ${properties[i].propertyType}</p>
+            </div>
+            `
+        }else {
+
+        //    alert("no properties listed")
+        }
+    }
+    Output.innerHTML = displayOutput; 
+});
+
